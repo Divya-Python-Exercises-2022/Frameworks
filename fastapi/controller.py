@@ -62,9 +62,16 @@ class PartnerController:
                 db.partners.remove(partner)
 
 class BillController:
-    # def __init__(self, client_controller, partner_controller):
-    #     self.clientcontroller =  client_controller
-    #     self.partnercontroller = partner_controller
+    def __init__(self, client_controller, partner_controller):
+         self.client_controller =  client_controller
+         self.partner_controller = partner_controller
 
     def add_bill(self, bill):
         db.bills.append(bill)
+
+    def list_bill_by_client_id(self, client_id):
+        result = []
+        for bills in db.bills:
+            if bills.client == client_id:
+                result.append(bills)
+        return result

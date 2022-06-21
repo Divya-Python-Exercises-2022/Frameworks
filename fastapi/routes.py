@@ -9,7 +9,7 @@ bike_routes = APIRouter()
 bike_controller = BikeController()
 client_controller = ClientController()
 partner_controller = PartnerController()
-bill_controller = BillController()
+bill_controller = BillController(client_controller, partner_controller)
 
 
 @bike_routes.get('/bikes')
@@ -75,3 +75,7 @@ def delete_partner(id_: str):
 @bike_routes.post('/bills')
 def post_bills(bill: Bill):
     bill_controller.add_bill(bill)
+
+@bike_routes.get('/bills/by_client_id')
+def get_bills_by_client_id(client_id: str):
+    return bill_controller.list_bill_by_client_id(client_id)
