@@ -5,6 +5,8 @@ from fastapi import APIRouter
 
 
 bike_routes = APIRouter()
+client_routes = APIRouter()
+partner_routes = APIRouter()
 
 bike_controller = BikeController()
 client_controller = ClientController()
@@ -32,42 +34,42 @@ def delete_bike(id_: str):
     bike_controller.remove_bike(id_)
 
 
-@bike_routes.get('/clients')
+@client_routes.get('/clients')
 def get_clients():
     return client_controller.list_clients()
 
 
-@bike_routes.get('/clients/by_id')
+@client_routes.get('/clients/by_id')
 def get_client_by_id(id_: str):
     return client_controller.list_client_by_id(id_)
 
 
-@bike_routes.post('/clients')
+@client_routes.post('/clients')
 def post_clients(client: Client):
     client_controller.add_client(client)
 
 
-@bike_routes.delete('/clients/{id_}')
+@client_routes.delete('/clients/{id_}')
 def delete_client(id_: str):
     client_controller.remove_client(id_)
 
 
-@bike_routes.get('/partners')
+@partner_routes.get('/partners')
 def get_partners():
     return partner_controller.list_partners()
 
 
-@bike_routes.get('/partners/by_id')
+@partner_routes.get('/partners/by_id')
 def get_partner_by_id(id_: str):
     return partner_controller.list_partner_by_id(id_)
 
 
-@bike_routes.post('/partners')
+@partner_routes.post('/partners')
 def post_partners(partner: Partner):
     partner_controller.add_partner(partner)
 
 
-@bike_routes.delete('/partners/{id_}')
+@partner_routes.delete('/partners/{id_}')
 def delete_partner(id_: str):
     partner_controller.remove_partner(id_)
 

@@ -19,7 +19,6 @@ class BikeController:
         current_list.append(bike)
         db.store_bikes(current_list)
 
-    
     def remove_bike(self, id_: str):
         for bike in db.bikes:
             if bike.id == id_:
@@ -27,10 +26,12 @@ class BikeController:
 
 class ClientController:
     def list_clients(self):
-        return db.clients
+        return db.load_clients()
 
     def add_client(self, client):
-        db.clients.append(client)
+        current_list = db.load_clients()
+        current_list.append(client)
+        db.store_clients(client)
 
     def list_client_by_id(self, id_):
         result = []

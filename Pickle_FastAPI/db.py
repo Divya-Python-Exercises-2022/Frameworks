@@ -3,20 +3,13 @@ import os
 from models import Bike, Client, Partner, Bill
 import pickle
 
-#bikes = []
-
-clients = []
+#clients = []
 
 partners = []
 
 bills = []
 
 def load_bikes():
-    # if os.path.isfile('bikes.pickle') is False:
-    #     raise Exception('File not found')
-    # with open('bikes.pickle', 'rb+') as f:
-    #     bikes_loaded = pickle.load(f)
-    # return bikes_loaded
     try:
         with open('bikes.pickle', 'rb') as file:
              bikes_loaded = pickle.load(file)
@@ -31,3 +24,19 @@ def store_bikes(bike):
         pickle.dump(bike, file)
 
 bikes = load_bikes()
+
+def load_clients():
+    try:
+        with open('clients.pickle', 'rb') as file:
+             clients_loaded = pickle.load(file)
+        return clients_loaded
+    except FileNotFoundError:
+        client = []
+        store_clients(client)
+        return client
+
+def store_clients(bike):
+    with open('bikes.pickle', 'wb') as file:
+        pickle.dump(bike, file)
+
+clients = load_clients()
