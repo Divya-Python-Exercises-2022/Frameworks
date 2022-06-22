@@ -7,7 +7,7 @@ class BikeController:
         #return db.bikes
 
     def list_bikes_by_manufacturer(self, manufacturer):
-        bikes = db.bikes
+        bikes = db.load_bikes()
         result = []
         for bike in bikes:
             if bike.manufacturer == manufacturer:
@@ -20,9 +20,11 @@ class BikeController:
         db.store_bikes(current_list)
 
     def remove_bike(self, id_: str):
-        for bike in db.bikes:
+        current_bikes = db.load_bikes()
+        for bike in current_bikes:
             if bike.id == id_:
-                db.bikes.remove(bike)
+                current_bikes.remove(bike)
+                db.store_bikes(current_bikes)
 
 class ClientController:
     def list_clients(self):
@@ -31,20 +33,23 @@ class ClientController:
     def add_client(self, client):
         current_list = db.load_clients()
         current_list.append(client)
-        db.store_clients(client)
+        db.store_clients(current_list)
 
     def list_client_by_id(self, id_):
         result = []
-        for client in db.clients:
+        current_clients = db.load_clients()
+        for client in current_clients:
             if client.id == id_:
                 result.append(client)
         return result
 
 
     def remove_client(self, id_: str):
-        for client in db.clients:
+        current_clients = db.load_clients()
+        for client in current_clients:
             if client.id == id_:
-                db.clients.remove(client)
+                current_clients.remove(client)
+                db.store_clients(current_clients)
 
 
 class PartnerController:

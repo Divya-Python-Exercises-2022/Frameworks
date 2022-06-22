@@ -23,7 +23,7 @@ def store_bikes(bike):
     with open('bikes.pickle', 'wb') as file:
         pickle.dump(bike, file)
 
-bikes = load_bikes()
+load_bikes()
 
 def load_clients():
     try:
@@ -35,8 +35,8 @@ def load_clients():
         store_clients(client)
         return client
 
-def store_clients(bike):
-    with open('bikes.pickle', 'wb') as file:
-        pickle.dump(bike, file)
+def store_clients(client):
+    with open('clients.pickle', 'wb') as file:
+        pickle.dump(client, file)
 
-clients = load_clients()
+load_clients()

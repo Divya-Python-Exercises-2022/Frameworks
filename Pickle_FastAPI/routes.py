@@ -7,6 +7,7 @@ from fastapi import APIRouter
 bike_routes = APIRouter()
 client_routes = APIRouter()
 partner_routes = APIRouter()
+bill_routes = APIRouter()
 
 bike_controller = BikeController()
 client_controller = ClientController()
@@ -74,10 +75,10 @@ def delete_partner(id_: str):
     partner_controller.remove_partner(id_)
 
 
-@bike_routes.post('/bills')
+@bill_routes.post('/bills')
 def post_bills(bill: Bill):
     bill_controller.add_bill(bill)
 
-@bike_routes.get('/bills/by_client_id')
+@bill_routes.get('/bills/by_client_id')
 def get_bills_by_client_id(client_id: str):
     return bill_controller.list_bill_by_client_id(client_id)
